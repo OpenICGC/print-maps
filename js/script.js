@@ -34,12 +34,6 @@ if (!mapboxgl.accessToken || mapboxgl.accessToken.length < 10) {
     }
 }
 
-// Show attribution requirement of initial style
-if (form.styleSelect.value.indexOf('mapbox') >= 0)
-    document.getElementById('mapbox-attribution').style.display = 'block';
-else
-    document.getElementById('openmaptiles-attribution').style.display = 'block';
-
 
 //
 // Interactive map
@@ -61,8 +55,8 @@ var map;
 try {
     map = new mapboxgl.Map({
         container: 'map',
-        center: [0, 0],
-        zoom: 0.5,
+        center: [1.67, 41.68],
+        zoom: 8,
         pitch: 0,
         style: form.styleSelect.value
     });
@@ -89,7 +83,7 @@ if ('geolocation' in navigator) {
     navigator.geolocation.getCurrentPosition(function(position) {
         'use strict';
         map.flyTo({center: [position.coords.longitude,
-            position.coords.latitude], zoom: 10});
+            position.coords.latitude], zoom: 8});
     });
 }
 
@@ -168,7 +162,7 @@ function isError() {
 
 form.widthInput.addEventListener('change', function(e) {
     'use strict';
-    var unit = form.unitOptions[0].checked ? 'in' : 'mm';
+    var unit = form.unitOptions[0].checked ? 'mm' : 'in';
     var val = (unit == 'mm') ? Number(e.target.value / 25.4) : Number(e.target.value);
     var dpi = Number(form.dpiInput.value);
     if (val > 0) {
@@ -194,7 +188,7 @@ form.widthInput.addEventListener('change', function(e) {
 
 form.heightInput.addEventListener('change', function(e) {
     'use strict';
-    var unit = form.unitOptions[0].checked ? 'in' : 'mm';
+    var unit = form.unitOptions[0].checked ? 'mm' : 'in';
     var val = (unit == 'mm') ? Number(e.target.value / 25.4) : Number(e.target.value);
     var dpi = Number(form.dpiInput.value);
     if (val > 0) {
@@ -236,18 +230,12 @@ form.dpiInput.addEventListener('change', function(e) {
 form.styleSelect.addEventListener('change', function() {
     'use strict';
     try {
+        console.debug(form.styleSelect.value);
         map.setStyle(form.styleSelect.value);
     } catch (e) {
         openErrorModal("Error changing style: " + e.message);
     }
-    // Update attribution requirements
-    if (form.styleSelect.value.indexOf('mapbox') >= 0) {
-        document.getElementById('mapbox-attribution').style.display = 'block';
-        document.getElementById('openmaptiles-attribution').style.display = 'none';
-    } else {
-        document.getElementById('mapbox-attribution').style.display = 'none';
-        document.getElementById('openmaptiles-attribution').style.display = 'block';
-    }
+  
 });
 
 form.mmUnit.addEventListener('change', function() {
@@ -333,7 +321,7 @@ function measureScrollbar() {
 
 function toPixels(length) {
     'use strict';
-    var unit = form.unitOptions[0].checked ? 'in' : 'mm';
+    var unit = form.unitOptions[0].checked ? 'mm' : 'in';
     var conversionFactor = 96;
     if (unit == 'mm') {
         conversionFactor /= 25.4;
@@ -369,7 +357,7 @@ function generateMap() {
 
     var format = form.outputOptions[0].checked ? 'png' : 'pdf';
 
-    var unit = form.unitOptions[0].checked ? 'in' : 'mm';
+    var unit = form.unitOptions[0].checked ? 'mm' : 'in';
 
     var style = form.styleSelect.value;
 

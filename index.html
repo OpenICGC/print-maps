@@ -15,7 +15,7 @@
 
 <div class="page-header">
   <h1>Print Maps</h1>
-  <p class="lead">High-resolution maps in the browser, for printing.</p>
+  <p class="lead">Mapes vector tiles per imprimir.</p>
 </div>
 
 <noscript>
@@ -29,18 +29,19 @@
   <div class="row">
     <div class="col-sm-4">
       <div class="form-group">
-        <label>Unit</label><br>
+        <label>Unitats</label><br>       
         <label class="radio-inline">
-          <input type="radio" name="unitOptions" value="in" id="inUnit" checked> Inch
+          <input type="radio" name="unitOptions" value="mm" id="mmUnit" checked> Milímetres
         </label>
         <label class="radio-inline">
-          <input type="radio" name="unitOptions" value="mm" id="mmUnit"> Millimeter
+          <input type="radio" name="unitOptions" value="in" id="inUnit" > Polzades
         </label>
+       
       </div>
     </div>
     <div class="col-sm-3">
       <div class="form-group">
-        <label>Output format</label><br>
+        <label>Format de sortida</label><br>
         <label class="radio-inline">
           <input type="radio" name="outputOptions" value="png" checked> PNG
         </label>
@@ -51,21 +52,15 @@
     </div>
     <div class="col-sm-5">
       <div class="form-group">
-        <label for="styleSelect">Map style</label>
+        <label for="styleSelect">Estil del mapa</label>
         <select id="styleSelect" class="form-control">
-          <option value="mapbox://styles/mapbox/bright-v9">Mapbox Bright</option>
-          <option value="mapbox://styles/mapbox/outdoors-v10">Mapbox Outdoors</option>
-          <option value="mapbox://styles/mapbox/emerald-v8">Mapbox Emerald</option>
-          <option value="mapbox://styles/mapbox/light-v9">Mapbox Light</option>
-          <option value="mapbox://styles/mapbox/streets-v10">Mapbox Streets</option>
-          <option value="https://openmaptiles.github.io/positron-gl-style/style-cdn.json">Klokantech Positron</option>
-          <option value="https://openmaptiles.github.io/dark-matter-gl-style/style-cdn.json">Klokantech Dark Matter</option>
-          <option value="https://openmaptiles.github.io/osm-bright-gl-style/style-cdn.json">Klokantech OSM Bright</option>
-          <option value="https://openmaptiles.github.io/klokantech-basic-gl-style/style-cdn.json">Klokantech Basic</option>
-          <option value="https://openmaptiles.github.io/klokantech-terrain-gl-style/style-cdn.json">Klokantech Terrain</option>
-          <option value="https://openmaptiles.github.io/fiord-color-gl-style/style-cdn.json">Klokantech Fiord Color</option>
-          <option value="https://openmaptiles.github.io/toner-gl-style/style-cdn.json">Klokantech Toner</option>
-          <option value="http://osm-liberty.lukasmartinelli.ch/style.json">OSM Liberty</option>
+          <option value="https://tilemaps.icgc.cat/tileserver/styles/blavos.json">Blavós</option>
+          <option value="https://tilemaps.icgc.cat/tileserver/styles/clar.json">Clar</option>
+          <option value="https://tilemaps.icgc.cat/tileserver/styles/fosc.json">Fosc</option>
+          <option value="https://tilemaps.icgc.cat/tileserver/styles/gris.json">Gris</option>
+          <option value="https://tilemaps.icgc.cat/tileserver/styles/icgc5m.json">ICGC5M</option>
+          <option value="https://tilemaps.icgc.cat/tileserver/styles/icgc25m.json">ICGC25M</option>
+          <option value="https://tilemaps.icgc.cat/tileserver/styles/polit.json">Polit</option>
         </select>
       </div>
     </div>
@@ -73,14 +68,14 @@
   <div class="row">
     <div class="col-sm-2">
       <div class="form-group" id="widthGroup">
-        <label for="widthInput">Width</label>
-        <input type="text" class="form-control" id="widthInput" autocomplete="off" value="8">
+        <label for="widthInput">Amplada</label>
+        <input type="text" class="form-control" id="widthInput" autocomplete="off" value="200">
       </div>
     </div>
     <div class="col-sm-2">
       <div class="form-group" id="heightGroup">
-        <label for="heightInput">Height</label>
-        <input type="text" class="form-control" id="heightInput" autocomplete="off" value="6">
+        <label for="heightInput">Alçada</label>
+        <input type="text" class="form-control" id="heightInput" autocomplete="off" value="100">
       </div>
     </div>
     <div class="col-sm-3">
@@ -93,19 +88,19 @@
       <div class="row">
         <div class="col-sm-4">
           <div class="form-group" id="latGroup">
-            <label for="latInput">Latitude</label>
+            <label for="latInput">Latitud</label>
             <input type="text" class="form-control" id="latInput" autocomplete="off" value="">
           </div>
         </div>
         <div class="col-sm-4">
           <div class="form-group" id="lonGroup">
-            <label for="lonInput">Longitude</label>
+            <label for="lonInput">Longitud</label>
             <input type="text" class="form-control" id="lonInput" autocomplete="off" value="">
           </div>
         </div>
         <div class="col-sm-4">
           <div class="form-group" id="zoomGroup">
-            <label for="zoomInput">Zoom</label>
+            <label for="zoomInput">Nivell de zoom</label>
             <input type="text" class="form-control" id="zoomInput" autocomplete="off" value="">
           </div>
         </div>
@@ -119,7 +114,7 @@
   <div class="col-sm-12">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Map</h3>
+        <h3 class="panel-title">Mapa</h3>
       </div>
       <div class="panel-body map-container">
         <div id="map"></div>
@@ -127,36 +122,10 @@
     </div>
   </div>
 </div>
+
 <div class="row">
   <div class="col-sm-12">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Required Attribution</h3>
-      </div>
-      <div class="panel-body" id="mapbox-attribution" style="display: none;">
-        <p><strong>Attribution of maps is required.</strong> Per the <a href="https://www.mapbox.com/help/how-attribution-works/#static--print">Mapbox attribution requirements:</a></p>
-        <p><strong>Commerical use is prohibited.</strong></p>
-        <p>Static and print maps need to be attributed in the same fashion as you would cite a photograph: in a textual description near the image.</p>
-        <p>If you can include HTML, use this code snippet that includes links to Mapbox & OpenStreetMap:</p>
-        <pre>© &lt;a href='https://www.mapbox.com/about/maps/'&gt;Mapbox&lt;/a&gt; © &lt;a href='https://www.openstreetmap.org/copyright'&gt;OpenStreetMap&lt;/a&gt; &lt;strong&gt;&lt;a href='https://www.mapbox.com/map-feedback/' target='_blank'&gt;Improve this map&lt;/a&gt;&lt;/strong&gt;</pre>
-        <p>For print output or if you can’t include links, use this text-only attribution:</p>
-        <pre>© Mapbox, © OpenStreetMap</pre>
-      </div>
-      <div class="panel-body" id="openmaptiles-attribution" style="display: none;">
-        <p><strong>Attribution of maps is required.</strong> Per the <a href="https://openmaptiles.com/terms/">OpenMapTiles terms of use:</a></p>
-        <p><strong>Commerical use is prohibited.</strong></p>
-        <p>The OpenMapTiles has a strict requirement of attribution on the produced maps - whether you use the free, purchased or self-generated map tiles. It is important part of the sustainability strategy. By using OpenMapTiles you agree to provide such attribution on the maps you display.</p>
-        <p>For a browsable electronic map based on OpenMapTiles and OpenStreetMap data, the credit should appear in the corner of the map. For example:</p>
-        <pre>© &lt;a href='https://openmaptiles.org/'&gt;OpenMapTiles&lt;/a&gt; © &lt;a href='https://www.openstreetmap.org/copyright'&gt;OpenStreetMap contributors&lt;/a&gt; &lt;strong&gt;&lt;a href='https://www.mapbox.com/map-feedback/' target='_blank'&gt;Improve this map&lt;/a&gt;&lt;/strong&gt;</pre>
-        <p>For printed maps, images or video recording a similar attribution should be made in a clearly visible textual description near the map, in the same fashion as if you cite a photograph.</p>
-        <p>Other datasets (such as Satellite or DEM derived data) may require attribution as well.</p>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-sm-12">
-    <button type="submit" class="btn btn-primary btn-lg" id="generate-btn">Generate Map</button>
+    <button type="submit" class="btn btn-primary btn-lg" id="generate-btn">Generar Mapa</button>
     <div id="spinner"></div>
   </div>
 </div>
@@ -166,14 +135,14 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" onclick="closeErrorModal()"><span>&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title">Print Maps Error</h4>
+        <button type="button" class="close" onclick="closeErrorModal()"><span>&times;</span><span class="sr-only">Tancar</span></button>
+        <h4 class="modal-title">Error imprimint mapa</h4>
       </div>
       <div class="modal-body">
         <p id="modal-error-text"></p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" onclick="closeErrorModal()">Close</button>
+        <button type="button" class="btn btn-primary" onclick="closeErrorModal()">Tancar</button>
       </div>
     </div>
   </div>
@@ -191,10 +160,10 @@
 
 </div>
 
-<script type="text/javascript" src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.42.2/mapbox-gl.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/canvas-toblob/0.1/canvas-toBlob.min.js"></script>
-<script type="text/javascript" src="//cdn.rawgit.com/eligrey/FileSaver.js/1.3.3/FileSaver.min.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/jspdf/1.3.4/jspdf.min.js"></script>
+<script type="text/javascript" src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.js"></script>
+<script type="text/javascript" src="js/canvas-toBlob.min.js"></script>
+<script type="text/javascript" src="js/FileSaver.min.js"></script>
+<script type="text/javascript" src="js/jspdf.min.js"></script>
 <script type="text/javascript" src="js/script.js"></script>
 
 </body>
