@@ -368,6 +368,9 @@ function generateMap() {
 
     createPrintMap(width, height, dpi, format, unit, zoom, center,
         bearing, style, pitch);
+
+    
+
 }
 
 function createPrintMap(width, height, dpi, format, unit, zoom, center,
@@ -389,6 +392,9 @@ function createPrintMap(width, height, dpi, format, unit, zoom, center,
     container.style.height = toPixels(height);
     hidden.appendChild(container);
 
+
+    console.info(actualPixelRatio);
+
     // Render map
     var renderMap = new mapboxgl.Map({
         container: container,
@@ -400,6 +406,12 @@ function createPrintMap(width, height, dpi, format, unit, zoom, center,
         interactive: false,
         attributionControl: false
     });
+
+
+    calculateWF(renderMap.getCanvas().width, renderMap.getCanvas().height, dpi, format, unit, zoom, center,
+    bearing, pitch,renderMap.getBounds() );   
+
+
     renderMap.once('load', function() {
         if (format == 'png') {
             renderMap.getCanvas().toBlob(function(blob) {
